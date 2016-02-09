@@ -92,9 +92,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HomeModule.cs" />
+    <Compile Include="Bookstrapper.cs" />
+    <Compile Include="Modules\HomeModule.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserManagement\User.cs" />
+    <Compile Include="UserManagement\UserManager.cs" />
+    <Compile Include="UserManagement\UserMapper.cs" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>
