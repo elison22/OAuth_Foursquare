@@ -10,11 +10,9 @@ namespace OAuth_Foursquare.UserManagement
 {
     public class UserMapper : IUserMapper
     {
-        UserManager manager = new UserManager();
-
         public IUserIdentity GetUserFromIdentifier(Guid identifier, NancyContext context)
         {
-            return manager.getUser(identifier);
+            return UserManager.get().getUser(identifier);
         }
     }
 }

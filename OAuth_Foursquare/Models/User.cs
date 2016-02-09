@@ -4,15 +4,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace OAuth_Foursquare.UserManagement
+namespace OAuth_Foursquare.Models
 {
     public class User : IUserIdentity
     {
         private List<string> UserClaims = new List<string>();
-        public string Username { get; set; }
+        private string Username { get; set; }
 
-        public string Firstname { get; set; }
-        public string Lastname { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public Guid Id { get; set; }
         public string FS_Token { get; set; }
 
@@ -25,10 +25,8 @@ namespace OAuth_Foursquare.UserManagement
         }
         public string UserName
         {
-            get
-            {
-                return Username;
-            }
+            get { return Username; }
+            set { Username = value; }
         }
     }
 }

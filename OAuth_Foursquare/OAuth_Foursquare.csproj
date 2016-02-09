@@ -87,16 +87,18 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\home.html" />
+    <Content Include="Views\index.html" />
     <Content Include="Views\login.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bookstrapper.cs" />
     <Compile Include="Modules\HomeModule.cs" />
+    <Compile Include="Modules\LoginModule.cs" />
+    <Compile Include="Modules\SecureModule.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserManagement\User.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="UserManagement\UserManager.cs" />
     <Compile Include="UserManagement\UserMapper.cs" />
   </ItemGroup>

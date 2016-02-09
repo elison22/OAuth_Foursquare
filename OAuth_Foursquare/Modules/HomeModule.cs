@@ -1,4 +1,6 @@
 ﻿using Nancy;
+using OAuth_Foursquare.UserManagement;
+using OAuth_Foursquare.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +12,11 @@ namespace Modules.OAuth_Foursquare
     {
         public HomeModule()
         {
-            Get["/"] = _ => "Hello Nancy from Pluralsight";
-            Get["/home"] = _ => View["home"];
-            Get["/login"] = _ => View["login"];
+            Get["/"] = _ =>
+            {
+                List<User> users = UserManager.get().getUsers();
+                return View["index.html", users];
+            };
         }
     }
 }
