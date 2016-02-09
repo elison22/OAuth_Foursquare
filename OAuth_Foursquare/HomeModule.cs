@@ -12,6 +12,7 @@ namespace OAuth_Foursquare
         {
             Get["/"] = _ => "Hello Nancy from Pluralsight";
             Get["/home"] = _ => View["home"];
+            Get["/login"] = _ => View["login"];
         }
     }
 }
