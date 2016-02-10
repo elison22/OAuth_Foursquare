@@ -1,5 +1,6 @@
 ﻿using Nancy;
 using Nancy.ModelBinding;
+using Nancy.Authentication.Forms;
 using OAuth_Foursquare.UserManagement;
 using System;
 using System.Collections.Generic;
@@ -18,9 +19,10 @@ namespace OAuth_Foursquare.Modules
                 var loginParams = this.Bind<LoginParams>();
                 var user = UserManager.get().getUser(loginParams.Username);
                 if (user == null)
-                    return "Fail...";
-                else return "Success!";
+                    return "User does not exist...";
+                return this.LoginAndRedirect(user.Id, fallbackRedirectUrl: "/account");
             };
+            
         }
 
         public class LoginParams

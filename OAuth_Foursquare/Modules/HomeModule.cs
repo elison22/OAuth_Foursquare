@@ -15,8 +15,9 @@ namespace Modules.OAuth_Foursquare
             Get["/"] = _ =>
             {
                 List<User> users = UserManager.get().getUsers();
-                return View["index.html", users];
+                return View["users", users];
             };
         }
+        
     }
 }
