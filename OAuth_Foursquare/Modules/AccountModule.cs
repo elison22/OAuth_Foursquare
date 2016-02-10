@@ -1,5 +1,6 @@
 ﻿using Nancy;
 using Nancy.Security;
+using OAuth_Foursquare.UserManagement;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,8 @@ namespace OAuth_Foursquare.Modules
             this.RequiresAuthentication();
             Get["/account"] = _ =>
             {
-                return "I'm securely logged in as: " + this.Context.CurrentUser.UserName;
+                User currentUser = UserManager.get().getUser(this.Context.CurrentUser.UserName);
+                return View["account", currentUser];
             };
         }
     }

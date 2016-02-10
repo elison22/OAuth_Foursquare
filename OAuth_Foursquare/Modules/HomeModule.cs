@@ -1,6 +1,5 @@
 ﻿using Nancy;
 using OAuth_Foursquare.UserManagement;
-using OAuth_Foursquare.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,12 +11,15 @@ namespace OAuth_Foursquare.Modules
     {
         public HomeModule()
         {
-            Get["/"] = _ =>
+            Get["/"] = _ => Response.AsRedirect("/home");
+            Get["/home"] = _ =>
             {
                 List<User> users = UserManager.get().getUsers();
-                return View["users", users];
+                return View["home", users];
             };
         }
+
+        
         
     }
 }

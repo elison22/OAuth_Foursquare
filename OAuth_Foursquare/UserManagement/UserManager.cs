@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using OAuth_Foursquare.Models;
 
 namespace OAuth_Foursquare.UserManagement
 {
     public class UserManager
     {
+        private string path = "@/Data/users.json";
         private static UserManager instance = null;
         private static List<User> users = null;
         private UserManager()
@@ -65,6 +65,7 @@ namespace OAuth_Foursquare.UserManagement
             throw new NotImplementedException();
         }
 
+        // === Getter type things ===
         public User getUser(Guid id)
         {
             User match = users.FirstOrDefault(x => x.Id == id);
@@ -93,6 +94,12 @@ namespace OAuth_Foursquare.UserManagement
             return (
                 from u in users
                 select u.FirstName + " " + u.LastName).ToList();
+        }
+
+        // === Setter/Adder type things ===
+        public void addUser(User newUser)
+        {
+
         }
 
     }
