@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Modules.OAuth_Foursquare
+namespace OAuth_Foursquare
 {
     public class HomeModule : NancyModule
     {

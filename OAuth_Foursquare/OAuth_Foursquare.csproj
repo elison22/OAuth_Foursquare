@@ -93,16 +93,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bookstrapper.cs" />
-    <Compile Include="Modules\HomeModule.cs" />
-    <Compile Include="Modules\LoginModule.cs" />
-    <Compile Include="Modules\AccountModule.cs" />
+    <Compile Include="HomeModule.cs" />
+    <Compile Include="LoginModule.cs" />
+    <Compile Include="AccountModule.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="UserManagement\UserManager.cs" />
     <Compile Include="UserManagement\UserMapper.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Modules\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
