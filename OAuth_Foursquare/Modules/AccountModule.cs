@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace OAuth_Foursquare
+namespace OAuth_Foursquare.Modules
 {
     public class AccountModule : NancyModule
     {
