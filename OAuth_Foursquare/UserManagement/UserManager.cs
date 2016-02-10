@@ -7,7 +7,7 @@ namespace OAuth_Foursquare.UserManagement
 {
     public class UserManager
     {
-        private string path = "@/Data/users.json";
+        private string persistencePath = "@/Data/users.json";
         private static UserManager instance = null;
         private static List<User> users = null;
         private UserManager()
@@ -60,7 +60,7 @@ namespace OAuth_Foursquare.UserManagement
         {
             throw new NotImplementedException();
         }
-        private void writeUsers()
+        private void writeUsers(string path)
         {
             throw new NotImplementedException();
         }
@@ -99,7 +99,8 @@ namespace OAuth_Foursquare.UserManagement
         // === Setter/Adder type things ===
         public void addUser(User newUser)
         {
-
+            users.Add(newUser);
+            writeUsers(persistencePath);
         }
 
     }

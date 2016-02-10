@@ -1,4 +1,5 @@
 ﻿using Nancy;
+using OAuth_Foursquare.Models;
 using OAuth_Foursquare.UserManagement;
 using System;
 using System.Collections.Generic;

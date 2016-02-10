@@ -2,11 +2,11 @@
 using Nancy.ModelBinding;
 using Nancy.Authentication.Forms;
 using OAuth_Foursquare.UserManagement;
+using OAuth_Foursquare.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using OAuth_Foursquare.Models;
 
 namespace OAuth_Foursquare.Modules
 {

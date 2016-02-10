@@ -1,11 +1,13 @@
 ﻿using Nancy;
 using Nancy.ModelBinding;
+using Nancy.Authentication.Forms;
 using OAuth_Foursquare.Models;
 using OAuth_Foursquare.UserManagement;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using OAuth_Foursquare.Foursquare;
 
 namespace OAuth_Foursquare.Modules
 {
@@ -16,35 +18,48 @@ namespace OAuth_Foursquare.Modules
             Get["/create"] = _ => View["create"];
             Post["/create"] = _ =>
             {
-                CreateParams loginParams = this.Bind<CreateParams>();
-                if (UserManager.get().getUser(loginParams.Username) != null)
+                CreateParams createParams = this.Bind<CreateParams>();
+                if (UserManager.get().getUser(createParams.Username) != null)
                     return View["/error", new ErrorModel
                     {
                         Message = "A user with this username already exists.",
                         RedirectPage = "Create User",
                         RedirectURL = "/create"
                     }];
-                UserManager.get().addUser(buildUser(loginParams));
 
-                return null;    // === Implement this!
+                string FS_token = FoursquareAccess.get().getFSToken(createParams.FS_Username, createParams.FS_Password);
+
+                if (FS_token == null)
+                    return View["/error", new ErrorModel
+                    {
+                        Message = "These Foursquare credentials are invalid.",
+                        RedirectPage = "Create User",
+                        RedirectURL = "/create"
+                    }];
+
+                User newUser = buildUser(createParams, FS_token);
+                UserManager.get().addUser(newUser);
+
+                return this.LoginAndRedirect(newUser.Id, fallbackRedirectUrl:"/account");
             };
         }
 
-        private User buildUser(CreateParams userInfo)
+        private User buildUser(CreateParams userInfo, string FS_token)
         {
-            // figure out the token
-            String token = "";
-
-
             User newUser = new User
             {
                 FirstName = userInfo.Firstname,
                 LastName = userInfo.Lastname,
                 UserName = userInfo.Username,
                 Id = Guid.NewGuid(),
-                FS_Token = token
+                FS_Token = FS_token
             };
             return newUser;
+        }
+
+        private string getToken(string FS_login, string FS_password)
+        {
+            throw new NotImplementedException();
         }
 
         private class CreateParams
