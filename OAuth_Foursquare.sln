@@ -5,8 +5,6 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OAuth_Foursquare", "OAuth_Foursquare\OAuth_Foursquare.csproj", "{79353D44-BEC7-4173-9078-AADB321242DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NancyUserManager", "..\..\..\..\..\Documents\GitHub\Nancy-UserManager\NancyUserManager\NancyUserManager.csproj", "{98940A30-1B48-4F71-A6BA-85F0AAF31A2F}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,14 +21,6 @@ Global
 		{79353D44-BEC7-4173-9078-AADB321242DC}.MonoRelease|Any CPU.Build.0 = Release|Any CPU
 		{79353D44-BEC7-4173-9078-AADB321242DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{79353D44-BEC7-4173-9078-AADB321242DC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{98940A30-1B48-4F71-A6BA-85F0AAF31A2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{98940A30-1B48-4F71-A6BA-85F0AAF31A2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{98940A30-1B48-4F71-A6BA-85F0AAF31A2F}.MonoDebug|Any CPU.ActiveCfg = MonoDebug|Any CPU
-		{98940A30-1B48-4F71-A6BA-85F0AAF31A2F}.MonoDebug|Any CPU.Build.0 = MonoDebug|Any CPU
-		{98940A30-1B48-4F71-A6BA-85F0AAF31A2F}.MonoRelease|Any CPU.ActiveCfg = MonoRelease|Any CPU
-		{98940A30-1B48-4F71-A6BA-85F0AAF31A2F}.MonoRelease|Any CPU.Build.0 = MonoRelease|Any CPU
-		{98940A30-1B48-4F71-A6BA-85F0AAF31A2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{98940A30-1B48-4F71-A6BA-85F0AAF31A2F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
