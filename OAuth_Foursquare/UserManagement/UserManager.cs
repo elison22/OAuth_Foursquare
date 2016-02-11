@@ -103,5 +103,12 @@ namespace OAuth_Foursquare.UserManagement
             writeUsers(persistencePath);
         }
 
+        public void assignToken(string username, string token)
+        {
+            User user = getUser(username);
+            user.FS_Token = token;
+            writeUsers(persistencePath);
+        }
+
     }
 }

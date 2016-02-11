@@ -1,4 +1,3 @@
-C:\Users\Brandt\Dropbox\ClassesCurrent\CS462\proj3\OAuth_Foursquare\OAuth_Foursquare\obj\Debug\OAuth_Foursquare.csprojResolveAssemblyReference.cache
 C:\Users\Brandt\Dropbox\ClassesCurrent\CS462\proj3\OAuth_Foursquare\OAuth_Foursquare\bin\roslyn\csc.exe
 C:\Users\Brandt\Dropbox\ClassesCurrent\CS462\proj3\OAuth_Foursquare\OAuth_Foursquare\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
 C:\Users\Brandt\Dropbox\ClassesCurrent\CS462\proj3\OAuth_Foursquare\OAuth_Foursquare\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
@@ -22,5 +21,6 @@ C:\Users\Brandt\Dropbox\ClassesCurrent\CS462\proj3\OAuth_Foursquare\OAuth_Foursq
 C:\Users\Brandt\Dropbox\ClassesCurrent\CS462\proj3\OAuth_Foursquare\OAuth_Foursquare\bin\Nancy.xml
 C:\Users\Brandt\Dropbox\ClassesCurrent\CS462\proj3\OAuth_Foursquare\OAuth_Foursquare\bin\Nancy.Authentication.Forms.xml
 C:\Users\Brandt\Dropbox\ClassesCurrent\CS462\proj3\OAuth_Foursquare\OAuth_Foursquare\bin\Nancy.Hosting.Aspnet.xml
+C:\Users\Brandt\Dropbox\ClassesCurrent\CS462\proj3\OAuth_Foursquare\OAuth_Foursquare\obj\Debug\OAuth_Foursquare.csprojResolveAssemblyReference.cache
 C:\Users\Brandt\Dropbox\ClassesCurrent\CS462\proj3\OAuth_Foursquare\OAuth_Foursquare\obj\Debug\OAuth_Foursquare.dll
 C:\Users\Brandt\Dropbox\ClassesCurrent\CS462\proj3\OAuth_Foursquare\OAuth_Foursquare\obj\Debug\OAuth_Foursquare.pdb

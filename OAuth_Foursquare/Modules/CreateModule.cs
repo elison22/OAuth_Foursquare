@@ -27,39 +27,45 @@ namespace OAuth_Foursquare.Modules
                         RedirectURL = "/create"
                     }];
 
-                string FS_token = FoursquareAccess.get().getFSToken(createParams.FS_Username, createParams.FS_Password);
+                //string FS_token = getToken(createParams.FS_Username, createParams.FS_Password);
 
-                if (FS_token == null)
-                    return View["/error", new ErrorModel
-                    {
-                        Message = "These Foursquare credentials are invalid.",
-                        RedirectPage = "Create User",
-                        RedirectURL = "/create"
-                    }];
+                //if (FS_token == null)
+                //    return View["/error", new ErrorModel
+                //    {
+                //        Message = "These Foursquare credentials are invalid.",
+                //        RedirectPage = "Create User",
+                //        RedirectURL = "/create"
+                //    }];
 
-                User newUser = buildUser(createParams, FS_token);
+                User newUser = buildUser(createParams);
                 UserManager.get().addUser(newUser);
 
                 return this.LoginAndRedirect(newUser.Id, fallbackRedirectUrl:"/account");
             };
         }
 
-        private User buildUser(CreateParams userInfo, string FS_token)
+        private User buildUser(CreateParams userInfo)
         {
             User newUser = new User
             {
                 FirstName = userInfo.Firstname,
                 LastName = userInfo.Lastname,
                 UserName = userInfo.Username,
-                Id = Guid.NewGuid(),
-                FS_Token = FS_token
+                Id = Guid.NewGuid()
             };
             return newUser;
         }
 
         private string getToken(string FS_login, string FS_password)
         {
-            throw new NotImplementedException();
+            string FS_token = null;
+            try
+            {
+                FS_token = FoursquareAccess.get().getFSToken(FS_login, FS_password);
+            }
+            catch {}
+
+            return FS_token;
         }
 
         private class CreateParams
@@ -67,8 +73,6 @@ namespace OAuth_Foursquare.Modules
             public string Firstname { get; set; }
             public string Lastname { get; set; }
             public string Username { get; set; }
-            public string FS_Username { get; set; }
-            public string FS_Password { get; set; }
         }
 
     }
