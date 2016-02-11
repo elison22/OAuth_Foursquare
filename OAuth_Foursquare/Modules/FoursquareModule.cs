@@ -17,6 +17,7 @@ namespace OAuth_Foursquare.Modules
         public FoursquareModule()
         {
             this.RequiresAuthentication();
+            this.RequiresHttps();
 
             Get["/foursquare"] = _ => this.Response.AsRedirect("/foursquare/connect"); ;
             Get["/foursquare/connect"] = _ =>
@@ -25,7 +26,7 @@ namespace OAuth_Foursquare.Modules
                 string url = "https://foursquare.com/oauth2/authenticate" +
                                 "?client_id=" + client_id +
                                 "&response_type=code" +
-                                "&redirect_uri=p3.byubrandt.com/foursquare/code";
+                                "&redirect_uri=https://p3.byubrandt.com/foursquare/code";
 
                 Console.WriteLine("\nFirst connection to Foursquare using this URL:\n" + url);
 
@@ -43,7 +44,7 @@ namespace OAuth_Foursquare.Modules
                                     "?client_id=" + client_id +
                                     "&client_secret=" + client_secret +
                                     "&grant_type=authorization_code" +
-                                    "&redirect_uri=p3.byubrandt.com/home" +
+                                    "&redirect_uri=https://p3.byubrandt.com/home" +
                                     "&code=" + code;
 
                 //return this.Response.AsRedirect(getTokenUrl);
@@ -53,7 +54,7 @@ namespace OAuth_Foursquare.Modules
                 HttpClient client = new HttpClient();
                 HttpResponseMessage hrm = await client.GetAsync(getTokenUrl);
 
-                string access_token = hrm.Content.ToString();
+                string access_token = await hrm.Content.ReadAsStringAsync();
 
                 Console.WriteLine("\nThe original response content was:\n" + access_token);
 
