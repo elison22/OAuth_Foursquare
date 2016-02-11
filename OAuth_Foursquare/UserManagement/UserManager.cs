@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Web;
 
 namespace OAuth_Foursquare.UserManagement
@@ -45,6 +46,7 @@ namespace OAuth_Foursquare.UserManagement
             }
         }
 
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public static UserManager get()
         {
             if (instance == null)

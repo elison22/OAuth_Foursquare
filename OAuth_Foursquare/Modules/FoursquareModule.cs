@@ -1,5 +1,6 @@
 ﻿using Nancy;
 using Nancy.Security;
+using Newtonsoft.Json.Linq;
 using OAuth_Foursquare.UserManagement;
 using System;
 using System.Collections.Generic;
@@ -55,21 +56,27 @@ namespace OAuth_Foursquare.Modules
                 HttpResponseMessage hrm = await client.GetAsync(getTokenUrl);
 
                 string access_token = await hrm.Content.ReadAsStringAsync();
+                JObject obj = JObject.Parse(access_token);
 
                 Console.WriteLine("\nThe original response content was:\n" + access_token);
 
-                string tokenKey = "access_token:";
+                access_token = (string)obj["access_token"];
 
+                /*
+                string tokenKey = "\"access_token\":\"";
+                
                 int tokenStart = access_token.IndexOf(tokenKey) + tokenKey.Length;
-                int tokenEnd = access_token.IndexOfAny(new char[] { ',', '}' }, tokenStart);
+                int tokenEnd = access_token.IndexOfAny(new char[] { ',', '}', '"' }, tokenStart);
 
                 access_token = access_token.Substring(tokenStart, tokenEnd - tokenStart);
                 access_token = access_token.Trim();
+                */
 
                 Console.WriteLine("\nThe final access token is:\n" + access_token);
 
                 string currentUsername = this.Context.CurrentUser.UserName;
                 UserManager.get().assignToken(currentUsername, access_token);
+                
 
                 return this.Response.AsRedirect("/account");
 
