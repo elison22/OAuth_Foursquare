@@ -22,18 +22,22 @@ namespace OAuth_Foursquare.Modules
             Get["/foursquare/connect"] = _ =>
             {
 
-
                 string url = "https://foursquare.com/oauth2/authenticate" +
                                 "?client_id=" + client_id +
                                 "&response_type=code" +
                                 "&redirect_uri=p3.byubrandt.com/foursquare/code";
 
+                Console.WriteLine("\nFirst connection to Foursquare using this URL:\n" + url);
+
                 return this.Response.AsRedirect(url);
             };
 
             Get["/foursquare/code", true] = async (_, ct) =>
+            //Get["/foursquare/code"] = _ =>
             {
                 string code = (string)this.Request.Query["code"];
+
+                Console.WriteLine("\nFoursquare returned the following code:" + code);
 
                 string getTokenUrl = "https://foursquare.com/oauth2/access_token" +
                                     "?client_id=" + client_id +
@@ -42,10 +46,17 @@ namespace OAuth_Foursquare.Modules
                                     "&redirect_uri=p3.byubrandt.com/home" +
                                     "&code=" + code;
 
+                //return this.Response.AsRedirect(getTokenUrl);
+
+                Console.WriteLine("\nMaking a request to Foursquare using the following URL:\n"+getTokenUrl);
+
                 HttpClient client = new HttpClient();
                 HttpResponseMessage hrm = await client.GetAsync(getTokenUrl);
 
                 string access_token = hrm.Content.ToString();
+
+                Console.WriteLine("\nThe original response content was:\n" + access_token);
+
                 string tokenKey = "access_token:";
 
                 int tokenStart = access_token.IndexOf(tokenKey) + tokenKey.Length;
@@ -54,10 +65,13 @@ namespace OAuth_Foursquare.Modules
                 access_token = access_token.Substring(tokenStart, tokenEnd - tokenStart);
                 access_token = access_token.Trim();
 
+                Console.WriteLine("\nThe final access token is:\n" + access_token);
+
                 string currentUsername = this.Context.CurrentUser.UserName;
                 UserManager.get().assignToken(currentUsername, access_token);
 
                 return this.Response.AsRedirect("/account");
+
             };
         }
 
