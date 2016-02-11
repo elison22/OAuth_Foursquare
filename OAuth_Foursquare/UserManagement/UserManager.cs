@@ -109,7 +109,7 @@ namespace OAuth_Foursquare.UserManagement
         {
             User user = getUser(username);
             user.FS_Token = token;
-            writeUsers(persistencePath);
+            //writeUsers(persistencePath);
         }
 
     }
