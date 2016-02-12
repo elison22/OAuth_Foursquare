@@ -94,12 +94,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\account.html" />
+    <Content Include="Views\account_adv.html" />
+    <Content Include="Views\account_basic.html" />
     <Content Include="Views\create.html" />
     <Content Include="Views\error.html" />
     <Content Include="Views\home.html" />
     <Content Include="Views\login.html" />
-    <Content Include="Views\user.html" />
+    <Content Include="Views\user_adv.html" />
+    <Content Include="Views\user_basic.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -108,6 +110,7 @@
     <Compile Include="Bookstrapper.cs" />
     <Compile Include="Foursquare\FoursquareAccess.cs" />
     <Compile Include="Models\ErrorModel.cs" />
+    <Compile Include="Models\ViewModel.cs" />
     <Compile Include="Modules\CreateModule.cs" />
     <Compile Include="Modules\FoursquareModule.cs" />
     <Compile Include="Modules\HomeModule.cs" />

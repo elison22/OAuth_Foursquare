@@ -48,36 +48,25 @@ namespace OAuth_Foursquare.Modules
                                     "&redirect_uri=https://p3.byubrandt.com/home" +
                                     "&code=" + code;
 
-                //return this.Response.AsRedirect(getTokenUrl);
-
                 Console.WriteLine("\nMaking a request to Foursquare using the following URL:\n"+getTokenUrl);
 
+                // request the token
                 HttpClient client = new HttpClient();
                 HttpResponseMessage hrm = await client.GetAsync(getTokenUrl);
 
+                // get the response
                 string access_token = await hrm.Content.ReadAsStringAsync();
-                JObject obj = JObject.Parse(access_token);
-
                 Console.WriteLine("\nThe original response content was:\n" + access_token);
 
+                // get the token
+                JObject obj = JObject.Parse(access_token);
                 access_token = (string)obj["access_token"];
-
-                /*
-                string tokenKey = "\"access_token\":\"";
-                
-                int tokenStart = access_token.IndexOf(tokenKey) + tokenKey.Length;
-                int tokenEnd = access_token.IndexOfAny(new char[] { ',', '}', '"' }, tokenStart);
-
-                access_token = access_token.Substring(tokenStart, tokenEnd - tokenStart);
-                access_token = access_token.Trim();
-                */
-
                 Console.WriteLine("\nThe final access token is:\n" + access_token);
 
+                // add it to the user
                 string currentUsername = this.Context.CurrentUser.UserName;
                 UserManager.get().assignToken(currentUsername, access_token);
                 
-
                 return this.Response.AsRedirect("/account");
 
             };

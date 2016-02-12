@@ -25,7 +25,7 @@ namespace OAuth_Foursquare.Modules
                 if (this.Context.CurrentUser != null &&
                     selected.UserName == this.Context.CurrentUser.UserName)
                     return Response.AsRedirect("/account");
-                return View["user", selected];
+                return View["user", new ViewModel(this.Context, selected)];
             };
         }
 	}

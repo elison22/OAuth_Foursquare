@@ -3,9 +3,10 @@
 <head>
     <title></title>
 	<meta charset="utf-8" />
+    @Model.Header
 </head>
 <body>
-    @Each
+    @Each.Data
     <div>
         <a href="/user/@Current.UserName"> @Current.FirstName @Current.LastName</a> (@Current.UserName)
     </div>

@@ -20,12 +20,12 @@ namespace OAuth_Foursquare.Modules
             {
                 CreateParams createParams = this.Bind<CreateParams>();
                 if (UserManager.get().getUser(createParams.Username) != null)
-                    return View["/error", new ErrorModel
+                    return View["/error", new ViewModel(this.Context, new ErrorModel
                     {
                         Message = "A user with this username already exists.",
                         RedirectPage = "Create User",
                         RedirectURL = "/create"
-                    }];
+                    })];
 
                 //string FS_token = getToken(createParams.FS_Username, createParams.FS_Password);
 

@@ -20,12 +20,12 @@ namespace OAuth_Foursquare.Modules
                 LoginParams loginParams = this.Bind<LoginParams>();
                 User user = UserManager.get().getUser(loginParams.Username);
                 if (user == null)
-                    return View["error", new ErrorModel
+                    return View["error", new ViewModel(this.Context, new ErrorModel
                     {
                         Message = loginParams.Username + " is not a valid user.",
                         RedirectPage = "login",
                         RedirectURL = "/login"
-                    }];
+                    })];
                 return this.LoginAndRedirect(user.Id, fallbackRedirectUrl: "/account");
             };
 

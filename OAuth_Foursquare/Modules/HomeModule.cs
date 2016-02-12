@@ -1,4 +1,5 @@
 ﻿using Nancy;
+using OAuth_Foursquare.Models;
 using OAuth_Foursquare.UserManagement;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace OAuth_Foursquare.Modules
                 Console.WriteLine();
                 Console.WriteLine("Welcome to the home page!");
                 List<User> users = UserManager.get().getUsers();
-                return View["home", users];
+                return View["home", new ViewModel(this.Context, users)];
             };
         }
 
