@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -15,9 +17,9 @@ namespace OAuth_Foursquare.UserManagement
         {
             try
             {
-                users = readUsers();
+                users = readUsers(persistencePath);
             }
-            catch
+            catch(NotImplementedException)
             {
                 users = new List<User>
                 {
@@ -51,33 +53,41 @@ namespace OAuth_Foursquare.UserManagement
         public static UserManager get()
         {
             if (instance == null)
+            {
                 instance = new UserManager();
+            }
             return instance;
         }
-
-        private List<User> readUsers()
-        {
-            throw new NotImplementedException();
-        }
+        
         private List<User> readUsers(string path)
         {
-            throw new NotImplementedException();
+            string json = UserIO.readUserJson(path);
+
+            List<User> readInUsers;
+            try
+            {
+                readInUsers = JsonConvert.DeserializeObject<List<User>>(json);
+            }
+            catch
+            {
+                readInUsers = new List<User>();
+            }
+
+            return readInUsers;
         }
         private void writeUsers(string path)
         {
-            throw new NotImplementedException();
+            List<User> persisted = readUsers(path);
+            users = combineLists(persisted, users);
+
+            string json = JsonConvert.SerializeObject(users);
+            UserIO.writeUserJson(path, json);
         }
 
         // === Getter type things ===
         public User getUser(Guid id)
         {
             User match = users.FirstOrDefault(x => x.Id == id);
-            return match;
-        }
-
-        public Guid getUserId(string username)
-        {
-            Guid match = users.FirstOrDefault(x => x.UserName == username).Id;
             return match;
         }
 
@@ -92,25 +102,36 @@ namespace OAuth_Foursquare.UserManagement
             return users;
         }
 
-        public List<string> getFullNames()
-        {
-            return (
-                from u in users
-                select u.FirstName + " " + u.LastName).ToList();
-        }
-
         // === Setter/Adder type things ===
         public void addUser(User newUser)
         {
             users.Add(newUser);
-            //writeUsers(persistencePath);
+            writeUsers(persistencePath);
         }
 
         public void assignToken(string username, string token)
         {
             User user = getUser(username);
             user.FS_Token = token;
-            //writeUsers(persistencePath);
+            writeUsers(persistencePath);
+        }
+
+        private List<User> combineLists(List<User> fromFile, List<User> inMemory)
+        {
+            foreach(User memUser in inMemory)
+            {
+                if (fromFile.Contains(memUser))
+                    continue;
+                User usernameMatchInFile = (
+                    from fileUser in fromFile
+                    where fileUser.UserName == memUser.UserName
+                    select fileUser).FirstOrDefault();
+                if (usernameMatchInFile == null)
+                    fromFile.Add(memUser);
+                else if (memUser.FS_Token != null && memUser.FS_Token != "")
+                    usernameMatchInFile.FS_Token = memUser.FS_Token;
+            }
+            return fromFile;
         }
 
     }

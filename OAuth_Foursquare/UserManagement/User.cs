@@ -6,7 +6,7 @@ using System.Web;
 
 namespace OAuth_Foursquare.UserManagement
 {
-    public class User : IUserIdentity
+    public class User : IUserIdentity, IComparable
     {
         private List<string> UserClaims = new List<string>();
         private string Username { get; set; }
@@ -27,6 +27,19 @@ namespace OAuth_Foursquare.UserManagement
         {
             get { return Username; }
             set { Username = value; }
+        }
+
+        int IComparable.CompareTo(object obj)
+        {
+            if (obj == null)
+                return -1;
+            if (obj.GetType() != typeof(User))
+                return -1;
+            User uobj = (User)obj;
+            if (this.UserName != uobj.UserName ||
+                this.FS_Token != uobj.FS_Token)
+                return -1;
+            else return 0;
         }
     }
 }

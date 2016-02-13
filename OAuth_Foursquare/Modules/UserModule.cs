@@ -39,14 +39,14 @@ namespace OAuth_Foursquare.Modules
                 CheckinsModel checkins = FoursquareAccess.get().getCheckins(selected.FS_Token);
 
                 checkins.user = selected;
-                checkins.items.Add(new CheckinModel
-                {
-                    id = "This is the ID",
-                    createdAt = ConvertToUnixTimestamp(DateTime.Now.AddDays(-4).AddHours(11).AddMinutes(20)),
-                    timeZoneOffset = -600,
-                    venue = "Smiths",
-                    type = "Shopping"
-                });
+                //checkins.items.Add(new CheckinModel
+                //{
+                //    id = "This is the ID",
+                //    createdAt = ConvertToUnixTimestamp(DateTime.Now.AddDays(-4).AddHours(11).AddMinutes(20)),
+                //    timeZoneOffset = -600,
+                //    venue = "Smiths",
+                //    type = "Shopping"
+                //});
 
                 return View["user_adv", new ViewModel(this.Context, checkins)];
             };
