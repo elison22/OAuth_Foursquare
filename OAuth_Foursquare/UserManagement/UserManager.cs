@@ -10,7 +10,7 @@ namespace OAuth_Foursquare.UserManagement
 {
     public class UserManager
     {
-        private string persistencePath = "@/Data/users.json";
+        private string persistencePath = @"/Data/users.json";
         private static UserManager instance = null;
         private static List<User> users = null;
         private UserManager()
