@@ -12,6 +12,8 @@ namespace OAuth_Foursquare.UserManagement
     {
         private string persistenceDir = @"/Data";
         private string persistenceName = @"/users.json";
+        //private string persistenceDir = @"Data";
+        //private string persistenceName = @"\users.json";
         private static UserManager instance = null;
         private static List<User> users = null;
         private UserManager()
@@ -64,15 +66,7 @@ namespace OAuth_Foursquare.UserManagement
         {
             string json = UserIO.readUserJson(dir, name);
 
-            List<User> readInUsers;
-            try
-            {
-                readInUsers = JsonConvert.DeserializeObject<List<User>>(json);
-            }
-            catch
-            {
-                readInUsers = new List<User>();
-            }
+            List<User> readInUsers = JsonConvert.DeserializeObject<List<User>>(json) ?? new List<User>();
 
             return readInUsers;
         }

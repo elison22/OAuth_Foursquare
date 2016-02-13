@@ -16,7 +16,7 @@ namespace OAuth_Foursquare.UserManagement
             if (!Directory.Exists(combine(dir)))
                 Directory.CreateDirectory(combine(dir));
             if (!File.Exists(combine(dir)))
-                File.Create(combine(dir, name));
+                File.Create(combine(dir, name)).Close();
             else
                 data = File.ReadAllText(combine(dir, name));
             return data;
