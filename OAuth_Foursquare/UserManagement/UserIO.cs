@@ -24,6 +24,7 @@ namespace OAuth_Foursquare.UserManagement
 
         public static void writeUserJson(string dir, string name, string json)
         {
+
             File.WriteAllText(combine(dir, name), json);
         }
 

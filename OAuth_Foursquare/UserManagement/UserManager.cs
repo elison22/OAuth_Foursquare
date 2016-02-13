@@ -57,7 +57,12 @@ namespace OAuth_Foursquare.UserManagement
         {
             if (instance == null)
             {
+                Console.WriteLine("\nInstantiating UserManager");
                 instance = new UserManager();
+            }
+            else
+            {
+                Console.WriteLine("\nUsing the existing UserManager with " + users.Count + " Users");
             }
             return instance;
         }
@@ -65,8 +70,10 @@ namespace OAuth_Foursquare.UserManagement
         private List<User> readUsers(string dir, string name)
         {
             string json = UserIO.readUserJson(dir, name);
+            Console.WriteLine("\nRead in the following Json: " + json);
 
             List<User> readInUsers = JsonConvert.DeserializeObject<List<User>>(json) ?? new List<User>();
+            Console.WriteLine("Converted it to " + readInUsers.Count + " Users.");
 
             return readInUsers;
         }
@@ -76,6 +83,7 @@ namespace OAuth_Foursquare.UserManagement
             users = combineLists(persisted, users);
 
             string json = JsonConvert.SerializeObject(users);
+            Console.WriteLine("\nSerialized users for writing into the following Json:\n" + json);
             UserIO.writeUserJson(dir, name, json);
         }
 
