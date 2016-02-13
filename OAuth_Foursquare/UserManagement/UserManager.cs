@@ -10,14 +10,15 @@ namespace OAuth_Foursquare.UserManagement
 {
     public class UserManager
     {
-        private string persistencePath = @"/Data/users.json";
+        private string persistenceDir = @"/Data";
+        private string persistenceName = @"users.json";
         private static UserManager instance = null;
         private static List<User> users = null;
         private UserManager()
         {
             try
             {
-                users = readUsers(persistencePath);
+                users = readUsers(persistenceDir, persistenceName);
             }
             catch(NotImplementedException)
             {
@@ -59,9 +60,9 @@ namespace OAuth_Foursquare.UserManagement
             return instance;
         }
         
-        private List<User> readUsers(string path)
+        private List<User> readUsers(string dir, string name)
         {
-            string json = UserIO.readUserJson(path);
+            string json = UserIO.readUserJson(dir, name);
 
             List<User> readInUsers;
             try
@@ -75,13 +76,13 @@ namespace OAuth_Foursquare.UserManagement
 
             return readInUsers;
         }
-        private void writeUsers(string path)
+        private void writeUsers(string dir, string name)
         {
-            List<User> persisted = readUsers(path);
+            List<User> persisted = readUsers(dir, name);
             users = combineLists(persisted, users);
 
             string json = JsonConvert.SerializeObject(users);
-            UserIO.writeUserJson(path, json);
+            UserIO.writeUserJson(dir, name, json);
         }
 
         // === Getter type things ===
@@ -106,14 +107,14 @@ namespace OAuth_Foursquare.UserManagement
         public void addUser(User newUser)
         {
             users.Add(newUser);
-            writeUsers(persistencePath);
+            writeUsers(persistenceDir, persistenceName);
         }
 
         public void assignToken(string username, string token)
         {
             User user = getUser(username);
             user.FS_Token = token;
-            writeUsers(persistencePath);
+            writeUsers(persistenceDir, persistenceName);
         }
 
         private List<User> combineLists(List<User> fromFile, List<User> inMemory)

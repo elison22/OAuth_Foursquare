@@ -8,19 +8,21 @@ namespace OAuth_Foursquare.UserManagement
 {
 	public class UserIO
 	{
-        public static string readUserJson(string path)
+        public static string readUserJson(string dir, string name)
         {
             string data = "";
-            if (!File.Exists(path))
-                File.Create(path);
+            if (!Directory.Exists(dir))
+                Directory.CreateDirectory(dir);
+            if (!File.Exists(dir + "/" + name))
+                File.Create(dir + "/" + name);
             else
-                data = File.ReadAllText(path);
+                data = File.ReadAllText(dir + "/" + name);
             return data;
         }
 
-        public static void writeUserJson(string path, string json)
+        public static void writeUserJson(string dir, string name, string json)
         {
-            File.WriteAllText(path, json);
+            File.WriteAllText(dir + "/" + name, json);
         }
 	}
 }
