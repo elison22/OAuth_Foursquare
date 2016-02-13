@@ -70,18 +70,20 @@ namespace OAuth_Foursquare.UserManagement
         private List<User> readUsers(string dir, string name)
         {
             string json = UserIO.readUserJson(dir, name);
-            Console.WriteLine("\nRead in the following Json: " + json);
+            Console.WriteLine("\nRead in the following Json:\n" + json);
 
             List<User> readInUsers = JsonConvert.DeserializeObject<List<User>>(json) ?? new List<User>();
-            Console.WriteLine("Converted it to " + readInUsers.Count + " Users.");
+            Console.WriteLine("\nConverted it to " + readInUsers.Count + " Users.");
 
             return readInUsers;
         }
         private void writeUsers(string dir, string name)
         {
+            Console.WriteLine("\nPreparing to persist " + users.Count + " users.");
             List<User> persisted = readUsers(dir, name);
+            Console.WriteLine("\nFound " + persisted.Count + " users on disk.");
             users = combineLists(persisted, users);
-
+            Console.WriteLine("\nCombined groups into " + users.Count +" users");
             string json = JsonConvert.SerializeObject(users);
             Console.WriteLine("\nSerialized users for writing into the following Json:\n" + json);
             UserIO.writeUserJson(dir, name, json);

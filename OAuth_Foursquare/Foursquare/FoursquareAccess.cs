@@ -93,7 +93,7 @@ namespace OAuth_Foursquare.Foursquare
         public CheckinsModel getCheckins(string FS_Token)
         {
             string url = getCheckinsUrl(FS_Token);
-            Console.WriteLine("\nGetting checkings using the following URL:\n" + url);
+            Console.WriteLine("\nGetting checkins using the following URL:\n" + url);
 
             string checkinJson = makeRequest(url);
             Console.WriteLine("\nRaw response data for the checkings is as follows:\n" + checkinJson);

@@ -15,8 +15,7 @@ namespace OAuth_Foursquare.Modules
             Get["/"] = _ => Response.AsRedirect("/home");
             Get["/home"] = _ =>
             {
-                Console.WriteLine();
-                Console.WriteLine("Welcome to the home page!");
+                Console.WriteLine("\nWelcome to the home page!");
                 List<User> users = UserManager.get().getUsers();
                 return View["home", new ViewModel(this.Context, users)];
             };

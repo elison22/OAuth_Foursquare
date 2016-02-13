@@ -15,7 +15,7 @@ namespace OAuth_Foursquare.UserManagement
 
             if (!Directory.Exists(combine(dir)))
                 Directory.CreateDirectory(combine(dir));
-            if (!File.Exists(combine(dir)))
+            if (!File.Exists(combine(dir, name)))
                 File.Create(combine(dir, name)).Close();
             else
                 data = File.ReadAllText(combine(dir, name));
@@ -32,10 +32,7 @@ namespace OAuth_Foursquare.UserManagement
         {
             string full = root;
             foreach(string part in parts)
-            {
                 full += part;
-            }
-            Console.WriteLine("Examing: " + full);
             return full;
         }
     }
