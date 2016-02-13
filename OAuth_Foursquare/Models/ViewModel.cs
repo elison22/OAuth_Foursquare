@@ -24,6 +24,7 @@ namespace OAuth_Foursquare.Models
             {
                 menuItems.Add("Home", "/home");
                 menuItems.Add("Account", "/account");
+                menuItems.Add("Create", "/create");
                 menuItems.Add("Logout", "/logout");
             }
 
@@ -38,7 +39,7 @@ namespace OAuth_Foursquare.Models
                 string response = "<h2>";
                 foreach (KeyValuePair<string, string> itemVal in menuItems)
                 {
-                    string item = "<a href=\"" + itemVal.Value + "\" >" + itemVal.Key + "</a> ";
+                    string item = "<a href=\"" + itemVal.Value + "\" >" + itemVal.Key + "</a>\n";
                     response += item;
                 }
                 response += "</h2>";

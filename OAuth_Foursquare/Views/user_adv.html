@@ -6,6 +6,38 @@
     @Model.Header
 </head>
 <body>
-    You are viewing @Model.Data.FirstName @Model.Data.LastName.
+    <h3>
+        You are viewing @Model.Data.User.FirstName @Model.Data.User.LastName.
+    </h3>
+
+    @IfNot.Model.Data.HasItems
+    <h4>
+        @Model.Data.User.FirstName doesn't have any checkins.
+    </h4>
+    @EndIf
+    @If.Model.Data.HasItems
+    <h4>
+        Showing @Model.Data.User.FirstName's most recent checkin.
+    </h4>
+    <table>
+        <tr>
+            <th>Checkin Type</th>
+            <th>Venue</th>
+            <th>Checkin Time</th>
+        </tr>
+        <tr>
+            <td>
+                @Model.Data.MostRecent.Type
+            </td>
+            <td>
+                @Model.Data.MostRecent.Venue
+            </td>
+            <td>
+                @Model.Data.MostRecent.CreatedTime
+            </td>
+        </tr>
+    </table>
+    @EndIf
+
 </body>
 </html>

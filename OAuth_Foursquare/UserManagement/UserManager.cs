@@ -26,7 +26,8 @@ namespace OAuth_Foursquare.UserManagement
                         Id = Guid.NewGuid(),
                         FirstName = "Brandt",
                         LastName = "Elison",
-                        UserName = "elison22"
+                        UserName = "elison22",
+                        FS_Token = "TPJFCCV4AT5QMSM0IE1OOHEFKJACJJA2Y4UD32SEW3LJ3XIF"
                     },
                     new User
                     {
@@ -102,7 +103,7 @@ namespace OAuth_Foursquare.UserManagement
         public void addUser(User newUser)
         {
             users.Add(newUser);
-            writeUsers(persistencePath);
+            //writeUsers(persistencePath);
         }
 
         public void assignToken(string username, string token)

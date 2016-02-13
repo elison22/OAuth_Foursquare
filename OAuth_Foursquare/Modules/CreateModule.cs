@@ -15,7 +15,7 @@ namespace OAuth_Foursquare.Modules
     {
         public CreateModule()
         {
-            Get["/create"] = _ => View["create"];
+            Get["/create"] = _ => View["create", new ViewModel(this.Context, null)];
             Post["/create"] = _ =>
             {
                 CreateParams createParams = this.Bind<CreateParams>();
@@ -26,21 +26,11 @@ namespace OAuth_Foursquare.Modules
                         RedirectPage = "Create User",
                         RedirectURL = "/create"
                     })];
-
-                //string FS_token = getToken(createParams.FS_Username, createParams.FS_Password);
-
-                //if (FS_token == null)
-                //    return View["/error", new ErrorModel
-                //    {
-                //        Message = "These Foursquare credentials are invalid.",
-                //        RedirectPage = "Create User",
-                //        RedirectURL = "/create"
-                //    }];
-
+                
                 User newUser = buildUser(createParams);
                 UserManager.get().addUser(newUser);
 
-                return this.LoginAndRedirect(newUser.Id, fallbackRedirectUrl:"/account");
+                return this.LoginAndRedirect(newUser.Id, fallbackRedirectUrl:"/foursquare");
             };
         }
 
@@ -54,18 +44,6 @@ namespace OAuth_Foursquare.Modules
                 Id = Guid.NewGuid()
             };
             return newUser;
-        }
-
-        private string getToken(string FS_login, string FS_password)
-        {
-            string FS_token = null;
-            try
-            {
-                FS_token = FoursquareAccess.get().getFSToken(FS_login, FS_password);
-            }
-            catch {}
-
-            return FS_token;
         }
 
         private class CreateParams

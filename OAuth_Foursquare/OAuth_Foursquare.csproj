@@ -98,6 +98,7 @@
     <Content Include="Views\account_basic.html" />
     <Content Include="Views\create.html" />
     <Content Include="Views\error.html" />
+    <Content Include="Views\foursquare.html" />
     <Content Include="Views\home.html" />
     <Content Include="Views\login.html" />
     <Content Include="Views\user_adv.html" />
@@ -108,7 +109,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bookstrapper.cs" />
+    <Compile Include="Models\CheckinModel.cs" />
     <Compile Include="Foursquare\FoursquareAccess.cs" />
+    <Compile Include="Models\CheckinsModel.cs" />
     <Compile Include="Models\ErrorModel.cs" />
     <Compile Include="Models\ViewModel.cs" />
     <Compile Include="Modules\CreateModule.cs" />

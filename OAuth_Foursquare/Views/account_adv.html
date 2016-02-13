@@ -6,6 +6,36 @@
     @Model.Header
 </head>
 <body>
-    You are logged in as @Model.Data.FirstName @Model.Data.LastName.
+    <h3>
+        You are logged in as @Model.Data.User.FirstName @Model.Data.User.LastName.
+    </h3>
+    @IfNot.Model.Data.HasItems
+        You don't have any checkins.
+    @EndIf
+    @If.Model.Data.HasItems
+    <h4>
+        Your @Model.Data.MaxShown out of @Model.Data.TotalItems most recent checkins are shown below.
+    </h4>
+    <table>
+        <tr>
+            <th>Checkin Type</th>
+            <th>Venue</th>
+            <th>Checkin Time</th>
+        </tr>
+        @Each.Data.Items
+        <tr>
+            <td>
+                @Current.Type
+            </td>
+            <td>
+                @Current.Venue
+            </td>
+            <td>
+                @Current.CreatedTime
+            </td>
+        </tr>
+        @EndEach
+    </table>
+    @EndIf
 </body>
 </html>

@@ -14,7 +14,7 @@ namespace OAuth_Foursquare.Modules
     {
         public SessionModule()
         {
-            Get["/login"] = _ => View["login"];
+            Get["/login"] = _ => View["login", new ViewModel(this.Context, null)];
             Post["/login"] = _ =>
             {
                 LoginParams loginParams = this.Bind<LoginParams>();
