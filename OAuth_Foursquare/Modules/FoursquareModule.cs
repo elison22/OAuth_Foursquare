@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using OAuth_Foursquare.Models;
 
 namespace OAuth_Foursquare.Modules
 {
@@ -18,7 +19,7 @@ namespace OAuth_Foursquare.Modules
             this.RequiresAuthentication();
             this.RequiresHttps();
 
-            Get["/foursquare"] = _ => this.Response.AsRedirect("/foursquare/connect"); ;
+            Get["/foursquare"] = _ => View["foursquare", new ViewModel(this.Context, null)];
             Get["/foursquare/connect"] = _ =>
             {
 

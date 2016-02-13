@@ -19,9 +19,6 @@ namespace OAuth_Foursquare.Modules
             {
                 User currentUser = UserManager.get().getUser(this.Context.CurrentUser.UserName);
 
-                if(currentUser.FS_Token == null || currentUser.FS_Token == "")
-                    return View["account", new ViewModel(this.Context, currentUser)];
-
                 if (currentUser.FS_Token == null || currentUser.FS_Token.Trim() == "")
                     return View["account_basic", new ViewModel(this.Context, currentUser)];
 
