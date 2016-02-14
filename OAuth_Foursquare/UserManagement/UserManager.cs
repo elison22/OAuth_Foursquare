@@ -121,6 +121,21 @@ namespace OAuth_Foursquare.UserManagement
             writeUsers(persistenceDir, persistenceName);
         }
 
+        public void deleteUser(string username)
+        {
+            List<User> persisted = readUsers(persistenceDir, persistenceName);
+            
+            users = combineLists(persisted, users);
+            users = (
+                from u in users
+                where u.UserName != username
+                select u).ToList();
+
+            string json = JsonConvert.SerializeObject(users);
+            Console.WriteLine("\nSerialized users for writing into the following Json:\n" + json);
+            UserIO.writeUserJson(persistenceDir, persistenceName, json);
+        }
+
         private List<User> combineLists(List<User> fromFile, List<User> inMemory)
         {
             foreach(User memUser in inMemory)

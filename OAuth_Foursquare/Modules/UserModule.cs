@@ -1,4 +1,5 @@
 ﻿using Nancy;
+using Nancy.Authentication.Forms;
 using OAuth_Foursquare.Foursquare;
 using OAuth_Foursquare.Models;
 using OAuth_Foursquare.UserManagement;
@@ -13,6 +14,23 @@ namespace OAuth_Foursquare.Modules
 	{
         public UserModule()
         {
+            Get["/user/delete/{username}"] = _ =>
+            {
+                User toDelete = UserManager.get().getUser((string)_.username);
+
+                // if it's not a valid user, go back home
+                if (toDelete == null)
+                    return View["home", new ViewModel(this.Context, null)];
+
+                // if user is logged in, logout
+                if (this.Context.CurrentUser != null &&
+                    toDelete.UserName == this.Context.CurrentUser.UserName)
+                    this.LogoutWithoutRedirect();
+
+                UserManager.get().deleteUser(_.username);
+                return View["home", new ViewModel(this.Context, null)];
+            };
+
             Get["/user/{username}"] = _ =>
             {
                 User selected = UserManager.get().getUser((string)_.username);
@@ -51,7 +69,7 @@ namespace OAuth_Foursquare.Modules
                 return View["user_adv", new ViewModel(this.Context, checkins)];
             };
         }
-        
+
         private long ConvertToUnixTimestamp(DateTime date)
         {
             DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0);
